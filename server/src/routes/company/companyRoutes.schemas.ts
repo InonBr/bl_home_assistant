@@ -11,17 +11,14 @@ export const companyBodySchema = yup
 export const companyQuerySchema = yup
   .object()
   .shape({
-    companyName: yup.string().trim(),
-    contactName: yup.string().trim(),
-    phone: yup.string().trim(),
+    companyName: yup.string().trim().min(1),
+    address: yup.string().trim().min(1),
+    phone: yup.string().trim().min(1),
     companyNameSearchType: yup
       .string()
       .oneOf(["eq", "sw", "ew", "mi"])
       .required(),
-    contactNameSearchType: yup
-      .string()
-      .oneOf(["eq", "sw", "ew", "mi"])
-      .required(),
+    addressSearchType: yup.string().oneOf(["eq", "sw", "ew", "mi"]).required(),
   })
   .required();
 

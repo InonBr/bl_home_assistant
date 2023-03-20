@@ -6,7 +6,10 @@ import {
   companyQuerySchema,
 } from "./companyRoutes.schemas";
 import { validateSchema } from "../../systems/utils";
-import { createNewCompany } from "../../repositories/company/company.repository";
+import {
+  createNewCompany,
+  findCompanies,
+} from "../../repositories/company/company.repository";
 
 const companyRoutes = Router();
 
@@ -39,19 +42,21 @@ companyRoutes.get(
     try {
       const {
         companyNameSearchType,
-        contactNameSearchType,
+        address,
         companyName,
-        contactName,
+        addressSearchType,
         phone,
       } = req.query;
 
-      res.send({
+      const companies = await findCompanies({
         companyNameSearchType,
-        contactNameSearchType,
+        address,
         companyName,
-        contactName,
+        addressSearchType,
         phone,
       });
+
+      res.send(companies);
     } catch (err: any) {
       console.error(err);
 
