@@ -1,27 +1,33 @@
 import { Request, Response, Router } from "express";
-import { companyBodySchema } from "./companyRoutes.schemas";
-import { ValidationError } from "yup";
+import {
+  CompanyBodySchemaType,
+  companyBodySchema,
+} from "./companyRoutes.schemas";
+import { validateSchema } from "../../systems/utils";
+import { createNewCompany } from "../../repositories/company/company.repository";
 
 const companyRoutes = Router();
 
-companyRoutes.post("/company", async (req: Request, res: Response) => {
-  try {
-    const companyBody = companyBodySchema.validateSync(req.body, {
-      abortEarly: false,
-      stripUnknown: true,
-    });
+companyRoutes.post(
+  "/company",
+  validateSchema(companyBodySchema),
+  async (req: Request<{}, {}, CompanyBodySchemaType>, res: Response) => {
+    try {
+      const { name, phone, address } = req.body;
 
-    res.send({ ...companyBody });
-  } catch (err: any) {
-    console.error(err);
+      const newCompanyData = await createNewCompany({ name, phone, address });
 
-    if (!(err instanceof ValidationError)) {
-      return res.status(500).json({ msg: err.message });
+      const { companyId, creationDate, orders } = newCompanyData;
+
+      res.send({ name, phone, address, companyId, creationDate, orders });
+    } catch (err: any) {
+      console.error(err);
+
+      if (err instanceof Error) {
+        return res.status(500).json({ msg: err.message });
+      }
     }
-
-    const error = err as ValidationError;
-    return res.status(422).json({ errors: error.errors });
   }
-});
+);
 
 export default companyRoutes;

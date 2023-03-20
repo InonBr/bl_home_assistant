@@ -7,3 +7,5 @@ export const companyBodySchema = yup
     address: yup.string().required().trim(),
   })
   .required();
+
+export type CompanyBodySchemaType = yup.InferType<typeof companyBodySchema>;
