@@ -19,4 +19,6 @@ export const appDataSource = new DataSource({
   password,
   database,
   entities: [Company, Order],
+  migrationsTableName: "migrations",
+  migrations: [`${__dirname}/../migrations/*.ts`],
 });

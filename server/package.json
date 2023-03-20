@@ -8,6 +8,10 @@
   "scripts": {
     "start": "node --loader ts-node/esm ./src/app.ts",
     "start:nodemon": "nodemon ./src/app.ts",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "create:migrate-repo": "mkdir -p ./src/migrations",
+    "typeorm:migrate": "yarn create:migrate-repo && yarn run typeorm -- -d ./src/systems/typeOrm.config.ts migration:generate ./src/migrations/migration",
+    "typeorm:run-migrations": "yarn typeorm migration:run -- -d ./src/systems/typeOrm.config.ts",
     "tsc": "tsc --init"
   },
   "dependencies": {
