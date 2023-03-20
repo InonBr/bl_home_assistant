@@ -14,3 +14,8 @@ export const createNewCompany = async (companyData: CreateCompanyInterface) => {
 
   return newCompany;
 };
+
+export const findCompanyById = async (companyId: string) =>
+  await Company.findOneBy({
+    companyId,
+  });
