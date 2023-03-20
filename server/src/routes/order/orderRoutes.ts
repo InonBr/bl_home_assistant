@@ -8,7 +8,7 @@ const orderRoutes = Router();
 
 orderRoutes.post(
   "/order",
-  validateSchema(orderBodySchema),
+  validateSchema(orderBodySchema, "b"),
   async (req: Request<{}, {}, OrderBodySchemaType>, res: Response) => {
     try {
       const { companyId, employId, item } = req.body;
