@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { appDataSource } from "./systems/typeOrm.config";
+import companyRoutes from "./routes/company/companyRoutes";
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ const application = async () => {
       throw err;
     }
   }
+
+  app.use("/api", companyRoutes);
 
   app.get("/", (req, res) => {
     res.send("Hello world");
