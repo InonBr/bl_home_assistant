@@ -2,6 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { FieldValues, useForm } from "react-hook-form";
 import RadioButtons from "./RadioButtons";
 import { useState } from "react";
+import { queryRequest } from "../../lib/api";
 
 const QueryForm = () => {
   const [companyNameSearchType, setCompanyNameSearchType] = useState<
@@ -18,9 +19,21 @@ const QueryForm = () => {
   } = useForm();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
-    console.log(companyNameSearchType);
-    console.log(addressSearchType);
+    const nameQuery = data.companyName
+      ? `companyName=${data.companyName}&`
+      : "";
+    const addressQuery = data.companyAddress
+      ? `address=${data.companyAddress}&`
+      : "";
+    const phoneQuery = data.phone ? `phone=${data.phone}&` : "";
+    const companyNameQuery = `companyNameSearchType=${companyNameSearchType}&`;
+    const addressSearchQuery = `addressSearchType=${addressSearchType}`;
+
+    const q = `?${nameQuery}${addressQuery}${phoneQuery}${companyNameQuery}${addressSearchQuery}`;
+
+    const x = await queryRequest(q);
+
+    console.log(x);
   };
 
   return (
