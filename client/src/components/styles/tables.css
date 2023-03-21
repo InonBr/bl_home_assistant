@@ -1,0 +1,32 @@
+.tables {
+  border-collapse: collapse;
+  font-size: 14px;
+  width: 100%;
+}
+
+.tables th,
+.tables td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.tables th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tables tbody tr:nth-of-type(even) {
+  background-color: #f9f9f9;
+}
+
+.tables tbody tr:hover {
+  background-color: #ddd;
+}
+
+.table-container {
+  margin: 0 auto;
+  max-width: 90%;
+  overflow-x: scroll;
+}
