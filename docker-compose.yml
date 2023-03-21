@@ -12,3 +12,14 @@ services:
       - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
+
+  # server:
+  #   env_file: "./server/.env"
+  #   build:
+  #     context: ./server
+  #     dockerfile: ./Dockerfile
+  #   image: "server"
+  #   ports:
+  #     - "5000:5000"
+  #   depends_on:
+  #     - db
