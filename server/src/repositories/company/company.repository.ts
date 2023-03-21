@@ -61,11 +61,12 @@ export const findCompanies = async (queryData: CompanyQuerySchemaType) => {
   const query = `SELECT *
     FROM bl.company
     ${address || companyName || phone ? "WHERE" : ""}
-    ${phone ? "phone LIKE ? " : ""}
-    ${phone ? "AND " : ""}
-    ${companyName ? `name LIKE ? ` : ""}
-    ${phone || companyName ? "AND " : ""}
-    ${address ? `address LIKE ?` : ""};`;
+    ${phone ? "phone LIKE ?" : ""}
+    ${phone && companyName ? "AND" : ""}
+    ${companyName ? `name LIKE ?` : ""}
+    ${(phone || companyName) && address ? "AND" : ""}
+    ${address ? `address LIKE ?` : ""}
+    ${address || companyName || phone ? "" : "1=1"};`;
 
   const queryArray = createQueryArray({
     address: createQuery(address, addressSearchType),
