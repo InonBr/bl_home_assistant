@@ -15,3 +15,9 @@ Please clone this directory and read the manual in order to understand how to ru
 
 6. You can run the server locally on port **5000**, using `yarn start`.
 7. In the email I've sent you, you can find a file called `bl.postman_collection.json`, please import it into **Postman** in order to easily create orders and companies.
+
+## Client Setup
+
+1. Run `yarn install` in order to install all of the dependencies required for the project.
+2. Now, run `yarn start` in order to run the front end on port **3000**.
+3. Please make sure that the back end is also running while testing the app and that mysql is running.
