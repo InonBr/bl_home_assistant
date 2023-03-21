@@ -3,8 +3,9 @@ import { FieldValues, useForm } from "react-hook-form";
 import RadioButtons from "./RadioButtons";
 import { useState } from "react";
 import { queryRequest } from "../../lib/api";
+import { QueryFormParams } from "../interfaces/formInterfaces";
 
-const QueryForm = () => {
+const QueryForm = ({ setResult }: QueryFormParams) => {
   const [companyNameSearchType, setCompanyNameSearchType] = useState<
     "eq" | "sw" | "ew" | "mi"
   >("eq");
@@ -31,9 +32,7 @@ const QueryForm = () => {
 
     const q = `?${nameQuery}${addressQuery}${phoneQuery}${companyNameQuery}${addressSearchQuery}`;
 
-    const x = await queryRequest(q);
-
-    console.log(x);
+    setResult(await queryRequest(q));
   };
 
   return (
