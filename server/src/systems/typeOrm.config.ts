@@ -13,7 +13,7 @@ const database = process.env.MYSQL_DATABASE;
 
 export const appDataSource = new DataSource({
   type: "mysql",
-  host,
+  host: "db",
   port,
   username: rootUser,
   password,

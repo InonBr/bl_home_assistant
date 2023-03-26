@@ -13,13 +13,14 @@ services:
     volumes:
       - ./data:/var/lib/mysql
 
-  # server:
-  #   env_file: "./server/.env"
-  #   build:
-  #     context: ./server
-  #     dockerfile: ./Dockerfile
-  #   image: "server"
-  #   ports:
-  #     - "5000:5000"
-  #   depends_on:
-  #     - db
+  server:
+    env_file: "./server/.env"
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    image: "server"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    command: sh -c "yarn typeorm:migrate && yarn typeorm:run-migrations && yarn start"
