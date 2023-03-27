@@ -5,7 +5,8 @@ import { Order } from "../entities/OrderEntity";
 
 dotenv.config();
 
-const host = process.env.DB_HOST;
+const hostToUse = process.env.DOCKER ? process.env.DOCKER : process.env.DB_HOST;
+const host = hostToUse ? hostToUse : "";
 const port = parseInt(process.env.DB_PORT ? process.env.DB_PORT : "3306");
 const password = process.env.MYSQL_ROOT_PASSWORD;
 const rootUser = process.env.MYSQL_ROOT_USER;
@@ -21,4 +22,5 @@ export const appDataSource = new DataSource({
   entities: [Company, Order],
   migrationsTableName: "migrations",
   migrations: [`${__dirname}/../migrations/*.ts`],
+  synchronize: true,
 });

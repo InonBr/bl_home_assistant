@@ -11,6 +11,6 @@ RUN yarn install
 EXPOSE 5000
 EXPOSE 3306
 
-ENV NODE_ENV=docker
+ENV DOCKER=db
 
 CMD ["yarn", "start"]
