@@ -29,10 +29,6 @@ const application = async () => {
   app.use("/api", companyRoutes);
   app.use("/api", orderRoutes);
 
-  app.get("/", (req, res) => {
-    res.send("Hello world");
-  });
-
   app.listen(port, () => {
     console.log(`🟢 server is running on http://localhost:${port}`);
   });
