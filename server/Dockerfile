@@ -9,7 +9,6 @@ COPY .env ./
 RUN yarn install
 
 EXPOSE 5000
-EXPOSE 3306
 
 ENV DOCKER=db
 

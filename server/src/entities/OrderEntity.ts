@@ -10,7 +10,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { Company } from "./CompanyEntity";
 
-@Entity()
+@Entity({ name: "order" })
 export class Order extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   orderId: string = uuidv4();

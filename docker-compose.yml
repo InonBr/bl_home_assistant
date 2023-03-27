@@ -12,6 +12,11 @@ services:
       - "3306:3306"
     volumes:
       - ./data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   server:
     env_file: "./server/.env"
@@ -22,5 +27,6 @@ services:
     ports:
       - "5000:5000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     command: sh -c "yarn typeorm:migrate && yarn typeorm:run-migrations && yarn start"
